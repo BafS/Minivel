@@ -6,6 +6,8 @@
  */
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\CallableDispatcher;
+use Illuminate\Routing\Contracts\CallableDispatcher as CallableDispatcherContract;
 use Illuminate\Routing\Router;
 use Illuminate\Routing\Pipeline;
 use Illuminate\Events\Dispatcher;
@@ -17,6 +19,9 @@ $container = new Container;
 
 // Set global instance
 Container::setInstance($container);
+
+// Register CallableDispatcher
+$container->singleton(CallableDispatcherContract::class, CallableDispatcher::class);
 
 // Load services
 require_once __DIR__ . '/../app/services.php';
@@ -54,9 +59,7 @@ $request = Request::capture();
 $response = (new Pipeline($container))
     ->send($request)
     ->through($globalMiddleware)
-    ->then(function (Request $request) use ($router) {
-        return $router->dispatch($request);
-    });
+    ->then(static fn (Request $request) => $router->dispatch($request));
 
 // Send the response back to the browser
 $response->send();

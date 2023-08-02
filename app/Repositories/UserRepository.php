@@ -4,7 +4,8 @@ namespace App\Repositories;
 
 class UserRepository
 {
-    private $db = [
+    /** @var array<array<string, mixed>> */
+    private array $db = [
         [
             'name' => 'Niels',
             'age' => 50,

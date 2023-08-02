@@ -4,7 +4,7 @@
 
 use Illuminate\Routing\Router;
 
-$router->get('/', 'App\Controllers\Home@index');
+$router->get('/', [\App\Controllers\Home::class], 'index');
 
 $router->group(['middleware' => 'hello'], function (Router $router) {
     $router->get('/hello', function () {

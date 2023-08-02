@@ -3,22 +3,20 @@
 namespace App\Controllers;
 
 use App\Repositories\UserRepository;
+use Illuminate\Http\JsonResponse;
 
 class Users extends AbstractController
 {
-    private $users;
-
-    public function __construct(UserRepository $users)
+    public function __construct(private readonly UserRepository $users)
     {
-        $this->users = $users;
     }
 
-    public function index()
+    public function index(): JsonResponse
     {
         return $this->json($this->users->find());
     }
 
-    public function show(int $id)
+    public function show(int $id): JsonResponse
     {
         return $this->json($this->users->findOne($id));
     }

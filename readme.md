@@ -15,3 +15,5 @@ php -S localhost:8000 -t public
 ```
 
 Now you can visit [http://localhost:8000/](http://localhost:8000/) in your browser to view the output of this example.
+
+Routes are defined in app/routes/api.php

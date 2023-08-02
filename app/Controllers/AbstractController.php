@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 
 abstract class AbstractController extends Controller
 {
-    public function json($data, $status = 200)
+    public function json(mixed $data, int $status = 200): JsonResponse
     {
         return new JsonResponse($data, $status);
     }
